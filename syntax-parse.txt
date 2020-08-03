@@ -1,0 +1,20 @@
+------------
+syntax-parse
+------------
+
+Writing macros, processing syntax in racket. 
+
+
+the fortifying macros paper
+
+icfp:
+    https://www2.ccs.neu.edu/racket/pubs/icfp10-cf.pdf
+
+also see jfp version (which is longer). 
+
+
+tldr;
+
+- you can annotate pattern variables with syntax classes. So in `var:id`, var will only match identifiers.
+- these syntax classes lead to better error reporting by increasing the vocabulary of the system.
+- essentially makes writing macros more clear and robust.
