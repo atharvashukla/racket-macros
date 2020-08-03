@@ -1,0 +1,158 @@
+Hack Your Own Language (aka, 4620 Building Extensible Systems)
+
+
+Homepage
+========
+- focus on Racket’s advanced tools for building embedded domain-specific languages
+- build a language
+- prereq: rock solid understanding of Fundamentals
+
+some updates with code & date
+
+
+* General
+---------
+- organization: "studio" course
+- project: "hack your own language"
+- capstone memo: 11pt roman + 1in margin (all)
+- presentation: demo + code walk
+- grades: ok, ok+, ok, zero -map-> num
+
+
+* Readings
+----------
+- Realm of Racket [last unnumbered chap.]
+- Racket Documentation
+- Beautiful Racket (alternative approach)
+  
+  Videos
+  - Leif (ICFP)
+  - Findler (Lambda Jam)
+  - Flatt (ETH Zurich)
+
+- Greg's Fear of Macros
+- Lexi's Custom Core Forms in Racket
+
+* Communication
+---------------
+<page not applicable to me>
+- Michael, Matthias
+
+
+* Syllabus
+----------
+- one language, many languages, a programming-languge programming language
+- a model of Racket as an extensible programming language
+- the syntax extension mechanism; fluidly embedded languages
+- project ideas due
+- syntactic interposition points; modules
+- languages as modules; statically embedded languages
+- types and type checking
+- statically typed, statically embedded languages
+- equipping a language with "ugly" syntax
+- rest: your "hack your own language" project
+
+
+* Project
+---------
+- develop a small programming language (extension)
+  - describe, develop, present
+
+  Milestones
+  1. discuss idea with instructor
+  2. what the (ext) will be about (1 pg memo)
+  3. meet w/ instr. to discuss progress
+  4. Demo and present
+
+  Delivery
+  - public github repo
+  - presentation pdf
+  - documentation of grammar
+  - description of meaning
+
+  project
+  - lib (contains the language implementation)
+  - test (which contains the language tests)
+  - doc (which contains the language documentation)
+  - design (which contains the design documents
+
+
+* The Project
+-------------
+
+| Team                                  | Languag                        |
+|---------------------------------------+--------------------------------|
+| Nathaniel Rosenbloom and Isaac Walker | Artarchu                       |
+| Alex Knauth and Milo Turner           | Functors from Macros           |
+| Ian Smith and Edward Li               | Symbolic Basic Language        |
+| Alex Cherry and Yifan Xing            | Racket Spark Light             |
+| DJ Chu and Ryan Drew                  | Music Embedding Language (MEL) |
+| Xiangxi Guo and Sam Gupta             | The Traveler Language          |
+| Jakob Hain and Kevin Zhang            | Racket+Docs                    |
+| Alexandre Jolly and Neil Locketz      | The HTML Matching Language     |
+| Adrian Kant and Taylor Murphy         | SQLSourcery                    |
+| Dexter Kearney and Ty Nichols         | Pipelines                      |
+| Jared Gentner and Matthew Kolosik     | Music                          |
+| Jacob Ginsparg and Mitchell McLean    | Yomi: A Fighting Game Language |
+| Daniel Melcer and Josh Goldman        | The Inverse Language           |
+
+
+* Project Memos
+---------------
+
+** Design Memo
+  
+  - brief description of the lang
+  - pointer to github (<- desc. of vocab, grammar, scoping rules)
+  - choice of implementation milestones
+  - include header
+
+** Implementation Memo
+
+  - fix the writing (not content) of your project design memo; and
+  - which of the proposed elements were you able to implement according to your plans;
+  - which elements did you not get to and why; and
+
+
+  - design-shukla.pdf, implementation-shukla.pdf
+
+
+* Project Presentation
+----------------------
+
+** Idea Presentation Memo
+  - 5 - 10 min (ideally closer to 5)
+
+  primary goal
+  - what does a L programmer write down?
+  - what does the L language compute when an L program is run?
+
+  secondary goal
+  - show vocab and grammar
+  - show scoping rules
+  - typing rules
+  - meaning of programs
+   
+
+** Project Presentation
+  - 40 mins
+
+  cover:
+  - the purpose of your language (as implemented and running),
+  - a demo of a couple of sample programs in your language,
+  - a look at the user documentation,
+  - two interesting (as in error-prone) pieces of code, and
+  - the missing pieces
+
+
+
+* Assignments
+-------------
+  1. Examples of Embedded Languages
+  2. S-expressions Transformations
+  3. Racket Syntax Extensions
+  4. Racket Languages 1
+  5. Racket Languages 2
+  6. Simple Types (a)
+  7. Simple Types (b)
+  8. Project Memo

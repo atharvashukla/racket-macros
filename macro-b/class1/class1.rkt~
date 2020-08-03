@@ -1,0 +1,99 @@
+#lang racket
+
+(require rackunit)
+
+;; This one is mostly "dynamic" - shifted to runtime.
+;; We just define simple macro wrapper for class and object
+;; creation, and simply make actual functions do all the
+;; heavy-lifting during runtime.
+
+(require (for-syntax syntax/parse))
+
+
+;; --- DATA DEFINITIONS ---
+
+;; ClassInfo
+;; - parent : ClassInfo
+;; - fields : [Listof Symbol]
+;; - method->proc : [Hash (Symbol . Proc)]
+(struct class-info [parent fields method->proc])
+
+;; Object
+;; - class : ClassInfo (the class that the object implements)
+;; - field->values : [Hash (Symbol . Any)]
+(struct object [class fields->values])
+
+
+;; --- NEW and DOT functions ---
+
+;; ClassInfo [Any ...]  -> Object
+;; instantiates a new object that implements `class`
+(define (new class . args)
+  (let ([fields (class-info-fields class)])
+    ;; args check with the fields # of the class
+    (if (= (length args) (length fields))
+        (object class (make-hash (map cons fields args)))
+        (apply raise-arity-error 'new (length fields) args))))
+
+;; ASSUMPTION: this class (not its parent) HAS `method` in its definition
+(define (apply-object-on-method class obj method-name args)
+  (let (;; extracting the method from the hash of methods in class
+        [method (hash-ref (class-info-method->proc class) method-name)]
+        ;; values that correspond to the class' fields
+        [field-values (for/list ([f (class-info-fields class)])
+                        (hash-ref (object-fields->values obj) f))])
+    (apply (apply method field-values) args)))
+
+;; applies the `args` onto `method` implemented by the class of `obj`
+(define (dot-f obj method-name . args)
+  (define (dot-f-class class object method-name args)
+    (cond [(not class) (error 'dot "object does not implement method")]
+          [(hash-has-key? (class-info-method->proc class) method-name)
+           (apply-object-on-method class obj method-name args)]
+          [else (dot-f-class (class-info-parent class) object method-name args)]))
+  (dot-f-class (object-class obj) object method-name args))
+
+
+;; --- MACRO WRAPS ---
+
+;; simple macro so that the method does not
+;; have to be quoted. 
+(define-syntax-rule (dot object (method args ...))
+  (dot-f object 'method args ...))
+
+;; class : Stx -> Stx
+;; defines a class macro wrapping
+(define-syntax class
+  (syntax-parser
+    ;; matching the structure of the class definition
+    [(_ (field ...) superclass
+        [method-name expr]
+        ...)
+     ;; creating the class-info struct
+     #'(class-info
+        superclass
+        ;; putting the quote to turn fields into symbols
+        (list 'field ...)
+        ;; Hash between the method names and their proc
+        (make-hash (list (cons 'method-name (lambda (field ...) expr)) ...)))]))
+
+
+;; --- EXAMPLES/TESTS ---
+
+(define point%
+  ;; this class expands to a `class-info` struct
+  (class (x y) #f
+    [get-x (lambda () x)]))
+
+(define point2% 
+  (class (x y) point%
+    [get-y (lambda () y)]))
+
+
+(define point3%
+  (class (z y x) point2%
+    [get-z (lambda () z)]
+    [sum
+     (lambda () (+ x y z))]))
+
+(check-equal? (dot (new point3% 1 2 3) (sum)) 6)

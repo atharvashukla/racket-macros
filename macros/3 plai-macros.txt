@@ -1,0 +1,66 @@
+Part XII: Domain-Specific Languages and Metaprogramming
+
+
+Chapter 36  Domain-Specific Languages
+
+35.1 Language Design Variables
+
+- syntax is only partially interesting
+- control  constructs (recursion, continuations...)
+- what kind of data do they support (scheme blurs distinction bw control and data)
+- means  of organizing programs (functions, modules, classes...)
+- automation (memory management, run-time safety checks...)
+
+35.2 Language as Abstractions
+
+- languages  are abstractions. So a tast becomes easier
+- loops in java, map and filter in scheme. 
+
+35.3  Domain-Specific Languages
+
+- Languages bundled with packages -- Mathematica and Matlab
+  Fortran : formula translator
+  Algol   : algorithmic language
+  COBOL   : common business-oriented language
+  LISP    : list-processing language
+
+- will need to build little languages for whatever domain
+
+principles that  govern their design:
+1) define the domain!
+2) justify the existence of the language wrt current linguistic terrain
+   (how is this better than a GPL?:
+     - notational convenience
+     - better performance (dsl knows about the domain)
+     - non-standard semantics)
+
+"enveloping"
+- try to control other programs by treating them as components (shell, perl)
+- growing? How about another "escape" DSL: Makefile language
+
+"embedded"
+- expose part of application's functionality to the programmer (elisp)
+language embedded inside another _language_:
+  - vexing: syntactic
+  - can embedded language access values from the languge that encloses it?
+  - analysis, guarantees may no longer  hold
+
+- growth trajectory
+- DSL - GPL relationship
+- _negative space_ : what isn't there  <- know that about your language.
+  clear definition of neg space in definition for user to understand rationale.
+
+
+Chapter 36 Macros as Compilers
+
+36.1.1 Language Reuse
+
+- Tools are important to the users (debugger, IDE...)
+- compiler  from Scheme+ to Scheme
+
+
+36.1.1 Example: Measuring Time
+
+want to measure time elapsed  while evaluating an expression. (my-time e)
+
+

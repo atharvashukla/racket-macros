@@ -1,0 +1,29 @@
++----------------------------+
+|                            |
+| *everything*               |
+| (_ (name . varlist)        |
+|    ((var1 val1) ...)       | => normal case
+|    ((var2 val2) ...)       |
+|    (inherit iobj))         |
+|                            |
+| *no inherit obj*           |
+| (_ (name . varlist)        |
+|    ((var1 val1) ...)       | => the super object will be fail
+|    ((var2 val2) ...))      |
+|                            |
+| *no field*                 |
+| (_ (name . varlist)        |
+|    ((var2 val2) ...)       | => this will be rewritten to add () field list
+|    (inherit iobj))         |
+|                            |
+| *no field, no inherit obj* |
+| (_ (name . varlist)        | => rewritten  to  add () field list
+|    ((var2 val2) ...))      |
+|                            |
++----------------------------+
+
+*no field* transformation* 
+(_ (name . varlist) 
+   ()
+   ((var2 val2) ...) 
+   (inherit iobj))
